@@ -33,6 +33,10 @@ h6 {
   font-family: "Raleway", sans-serif;
 }
 
+.total-row {
+  background-color: yellow !important;
+}
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -924,6 +928,7 @@ section {
   text-align: center;
   border: 1px solid #d5e1ed;
   padding: 80px 20px;
+  width: 100%;
   transition: all ease-in-out 0.3s;
 }
 

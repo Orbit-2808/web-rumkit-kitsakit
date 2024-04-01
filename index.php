@@ -1,9 +1,11 @@
 <?php
   include('function.php');
 
+  $listObat = readObat();
   $listDepartmen = readDepartmen();
   $listDokter = readDokter();
   $countDepartmen = countDepartmen();
+  $countDokter = countDokter();
 ?>
 
 <!DOCTYPE html>
@@ -76,13 +78,13 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Departments</a></li>
+          <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
           <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#appointment" class="appointment-btn scrollto">Admin <span class="d-none d-md-inline">Page</span></a>
+      <a href="admin.php" class="appointment-btn scrollto">Admin <span class="d-none d-md-inline">Page</span></a>
 
     </div>
   </header><!-- End Header -->
@@ -192,7 +194,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <i class="fas fa-user-md"></i>
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= $countDokter ?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Doctors</p>
             </div>
           </div>
@@ -226,8 +228,46 @@
       </div>
     </section><!-- End Counts Section -->
 
+    <!-- ======= Obat Section ======= -->
+    <section id="obat" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Obat</h2>
+          <p>List Obat unyuuu</p>
+        </div>
+
+        <div class="row">
+          <?php
+            foreach($listObat as $obat){
+          ?>
+          <div class="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-mg-0">
+              <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="assets/img/gallery/gallery-1.jpg" alt="Obat">
+                  <div class="card-body">
+                      <h5 class="card-title"><?= $obat['nama_obat'] ?></h5>
+                      <p class="card-text"><?= $obat['deskripsi'] ?></p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><b>Harga: </b>Rp<?=number_format($obat['harga'],0,"",".")?></li>
+                  </ul>
+                  <!-- <div class="card-body">
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                  </div> -->
+              </div>
+          </div>
+          <?php
+            }
+          ?> 
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    <section id="departments" class="services">
       <div class="container">
 
         <div class="section-title">
@@ -238,12 +278,18 @@
         <div class="row">
           <?php
             foreach($listDepartmen as $departmen){
+              $listDokterDepartmen = readDokterDepartmen($departmen['id_departmen']);
           ?>
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-mg-0">
+            <div class="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-mg-0">
               <div class="icon-box">
-                <div class="icon"><i class="fas fa-pills"></i></div>
-                <h4><a href=""><?= $departmen['nama_departmen'] ?></a></h4>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                <!-- <div class="icon"><i class="fas fa-pills"></i></div> -->
+                <!-- <div><img style="width:100%; max-width:180px;" src="assets/img/departments-1.jpg" alt="<?= $departmen['nama_departmen'] ?>"></div> -->
+                <h4><a href=""><span><?= $departmen['nama_departmen'] ?></span></a></h4>
+                <?php
+                  foreach($listDokterDepartmen as $dokterDepartmen){
+                    echo "<p>".$dokterDepartmen['nama_dokter'].", </p>";
+                  }
+                ?>
               </div>
             </div>
           <?php
@@ -287,8 +333,73 @@
       </div>
     </section><!-- End Services Section -->
 
+    <!-- ======= Appointment Section ======= -->
+    <!-- <section id="appointment" class="appointment section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Make an Appointment</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <div class="validate"></div>
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+              <div class="validate"></div>
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <div class="validate"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 form-group mt-3">
+              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <div class="validate"></div>
+            </div>
+            <div class="col-md-4 form-group mt-3">
+              <select name="department" id="department" class="form-select">
+                <option value="">Select Department</option>
+                <option value="Department 1">Department 1</option>
+                <option value="Department 2">Department 2</option>
+                <option value="Department 3">Department 3</option>
+              </select>
+              <div class="validate"></div>
+            </div>
+            <div class="col-md-4 form-group mt-3">
+              <select name="doctor" id="doctor" class="form-select">
+                <option value="">Select Doctor</option>
+                <option value="Doctor 1">Doctor 1</option>
+                <option value="Doctor 2">Doctor 2</option>
+                <option value="Doctor 3">Doctor 3</option>
+              </select>
+              <div class="validate"></div>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
+            <div class="validate"></div>
+          </div>
+          <div class="mb-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+          </div>
+          <div class="text-center"><button type="submit">Make an Appointment</button></div>
+        </form>
+
+      </div>
+    </section> -->
+    <!-- End Appointment Section -->
+
     <!-- ======= Doctors Section ======= -->
-    <section id="doctors" class="doctors grey">
+    <section id="doctors" class="doctors section-bg">
       <div class="container">
 
         <div class="section-title">
