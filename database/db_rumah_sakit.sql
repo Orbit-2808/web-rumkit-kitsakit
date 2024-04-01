@@ -13,7 +13,6 @@
 
  Date: 01/04/2024 11:49:25
 */
-CREATE DATABASE IF NOT EXISTS db_rumah_sakit;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -21,7 +20,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for departmen
 -- ----------------------------
-DROP TABLE IF NOT EXISTS `departmen`;
+DROP TABLE IF EXISTS `departmen`;
 CREATE TABLE `departmen`  (
   `id_departmen` int NOT NULL AUTO_INCREMENT,
   `nama_departmen` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
