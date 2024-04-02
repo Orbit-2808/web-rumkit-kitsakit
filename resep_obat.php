@@ -74,13 +74,11 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto" href="#services">Departments</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#appointment" class="appointment-btn scrollto">Admin <span class="d-none d-md-inline">Page</span></a>
+      <a href="admin.php" class="appointment-btn scrollto">Admin <span class="d-none d-md-inline">Page</span></a>
 
     </div>
   </header><!-- End Header -->
@@ -93,7 +91,7 @@
 
         <div class="section-title">
           <h2>Resep Obat</h2>
-          <p>List resep obat unyuuu</p>
+          <a href="addResepObat.php?id=<?= $idRekamMedis ?>" class="btn btn-success">+ Add Resep Obat</a>
         </div>
 
         <table class="table table-bordered table-striped table-hover">
@@ -105,6 +103,7 @@
                     <th scope="col">Jumlah</th>
                     <th scope="col">Harga Satuan</th>
                     <th scope="col">Harga Total</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -120,6 +119,10 @@
                     <td><?= $resepObat['jumlah'] ?></td>
                     <td>Rp<?=number_format($resepObat['harga'],0,"",".")?></td>
                     <td>Rp<?=number_format($resepObat['harga']*$resepObat['jumlah'],0,"",".")?></td>
+                    <td>
+                        <a href="editResepObat.php?id_resep_obat=<?=$resepObat['id_resep_obat']?>" class="link-warning"><i class="bi bi-pencil-square">Edit</i></a>
+                        <a href="deleteResepObat.php?id_resep_obat=<?=$resepObat['id_resep_obat']?>&id_rekam_medis=<?=$idRekamMedis?>" onclick="return confirm('Yakin Hapus?')" class="link-danger"><i class="bi bi-trash3">Delete</i></a>
+                    </td>
                 </tr>
             <?php
                 $hargaTotal += $resepObat['harga']*$resepObat['jumlah'];
@@ -129,6 +132,7 @@
             <tr class="total-row">
                 <td colspan="5" style="text-align: right;">TOTAL</td>
                 <td>Rp<?=number_format($hargaTotal,0,"",".")?></td>
+                <td></td>
             </tr>
             </tbody>
         </table>

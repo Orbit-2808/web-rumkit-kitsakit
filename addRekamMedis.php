@@ -1,3 +1,30 @@
+<?php
+    include('function.php');
+
+    $listDokter = readDokter();
+    $listPasien = readPasien();
+
+    if (isset($_POST['btn-add'])) {
+        // jalankan query tambah record baru
+        $isAddSucceed = addRekamMedis($_POST);
+        if ($isAddSucceed > 0) {
+            // jika penambahan sukses, tampilkan alert
+            echo "
+            <script>
+                alert('Data Berhasil Ditambahkan');
+                document.location.href = 'admin.php';
+            </script>";
+        } else {
+            echo "
+            <script>
+                alert('Gagal menambahkan Data !');
+                document.location.href = 'admin.php';
+            </script>
+            ";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +32,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Medilab Bootstrap Template</title>
+  <title>KitSakit</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -60,66 +87,73 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">Medilab</a></h1>
+      <h1 class="logo me-auto"><a href="index.php">KitSakit</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="index.php">Home</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+      <a href="admin.php" class="appointment-btn scrollto">Admin <span class="d-none d-md-inline">Page</span></a>
 
     </div>
   </header><!-- End Header -->
 
-  <main id="main">
+  <main id="main" style="padding-top: 70px;">
 
-    <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
+    <!-- ======= Services Section ======= -->
+    <section id="appointment" class="appointment section-bg">
       <div class="container">
 
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
-          </ol>
+        <div class="section-title">
+          <h2>Tambah Rekam Medis</h2>
         </div>
 
-      </div>
-    </section><!-- End Breadcrumbs Section -->
+        <form action="addRekamMedis.php" method="post" role="form" id="form-add" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id">
+            <div class="mb-3">
+                <label for="dokter">Dokter</label>
+                <select class="form-select" aria-label="Category" id="dokter" name="dokter" required>
+                    <option value="" selected disabled hidden>Pilih</option>
+                    <?php
+                        foreach($listDokter as $dokter){
+                            echo '<option value="'.$dokter['id_dokter'].'">'.$dokter['nama_dokter'].'</option>';
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="pasien">Pasien</label>
+                <select class="form-select" aria-label="Category" id="pasien" name="pasien" required>
+                    <option value="" selected disabled hidden>Pilih</option>
+                    <?php
+                        foreach($listPasien as $pasien){
+                            echo '<option value="'.$pasien['id_pasien'].'">'.$pasien['nama_pasien'].'</option>';
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="tanggal" class="form-label">Tanggal</label>
+                <input type="datetime-local" class="form-control" id="tanggal" name="tanggal" required>
+            </div>
+            <div class="mb-3">
+                <label for="diagnosa" class="form-label">Diagnosa</label>
+                <input type="text" class="form-control" id="diagnosa" name="diagnosa" required>
+            </div>
+            <div class="mb-3">
+                <label for="catatan" class="form-label">Catatan</label>
+                <input type="text" class="form-control" id="catatan" name="catatan" required>
+            </div>
 
-    <section class="inner-page">
-      <div class="container">
-        <p>
-          Example inner page template
-        </p>
+            <a href="admin.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
+            <button type="submit" class="btn btn-primary text-white" name="btn-add" id="btn-add" form="form-add">Tambah Rekam Medis</button>
+        </form>
+
       </div>
     </section>
 
@@ -133,7 +167,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Medilab</h3>
+            <h3>KitSakit</h3>
             <p>
               A108 Adam Street <br>
               New York, NY 535022<br>
@@ -148,7 +182,7 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Departments</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
             </ul>
@@ -181,7 +215,7 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>Medilab</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>KitSakit</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
@@ -209,7 +243,6 @@
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>

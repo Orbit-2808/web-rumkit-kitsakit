@@ -78,8 +78,7 @@
           <li><a class="nav-link scrollto" href="index.php">Home</a></li>
           <li><a class="nav-link scrollto" href="#rekam_medis">Rekam Medis</a></li>
           <li><a class="nav-link scrollto" href="#obat">Obat</a></li>
-          <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
+          <li><a class="nav-link scrollto" href="#doctors">Dokter</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -95,7 +94,7 @@
 
         <div class="section-title">
           <h2>Rekam Medis</h2>
-          <p>List rekam medis unyuuu</p>
+          <a href="addRekamMedis.php" class="btn btn-success">+ Add Rekam Medis</a>
         </div>
 
         <table class="table table-bordered table-striped table-hover">
@@ -107,7 +106,8 @@
                     <th scope="col">Tanggal</th>
                     <th scope="col">Diagnosa</th>
                     <th scope="col" width="200px">Catatan</th>
-                    <th scope="col" width="200px">Resep Obat</th>
+                    <th scope="col" width="150px">Resep Obat</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -123,6 +123,11 @@
                     <td><?= $rekamMedis['diagnosa'] ?></td>
                     <td><?= $rekamMedis['catatan'] ?></td>
                     <td><a href="resep_obat.php?id=<?= $rekamMedis['id_rekam_medis'] ?>">Lihat Resep Obat</a></td>
+                    <td>
+                        <a href="editRekamMedis.php?id_rekam_medis=<?=$rekamMedis['id_rekam_medis']?>" class="link-warning"><i class="bi bi-pencil-square">Edit</i></a>
+                        <br>
+                        <a href="delete.php?id=<?=$rekamMedis['id_rekam_medis']?>&type=3" onclick="return confirm('Yakin Hapus?')" class="link-danger"><i class="bi bi-trash3">Delete</i></a>
+                    </td>
                 </tr>
             <?php
                 $no = $no + 1;
@@ -227,7 +232,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Doctors</h2>
+          <h2>Dokter</h2>
           <a href="addDokter.php" class="btn btn-success">+ Add Dokter</a>
         </div>
 

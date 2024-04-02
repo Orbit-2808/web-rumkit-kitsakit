@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 02/04/2024 14:17:27
+ Date: 03/04/2024 02:17:29
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `departmen`  (
   `spesialisasi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lokasi` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_departmen`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of departmen
@@ -56,7 +56,7 @@ CREATE TABLE `dokter`  (
   PRIMARY KEY (`id_dokter`) USING BTREE,
   INDEX `id_departmen`(`id_departmen` ASC) USING BTREE,
   CONSTRAINT `dokter_ibfk_1` FOREIGN KEY (`id_departmen`) REFERENCES `departmen` (`id_departmen`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dokter
@@ -83,7 +83,7 @@ CREATE TABLE `jadwal_praktek`  (
   INDEX `id_dokter`(`id_dokter` ASC) USING BTREE,
   CONSTRAINT `jadwal_praktek_ibfk_2` FOREIGN KEY (`id_poliklinik`) REFERENCES `poliklinik` (`id_poliklinik`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `jadwal_praktek_ibfk_3` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jadwal_praktek
@@ -102,7 +102,7 @@ CREATE TABLE `kamar`  (
   `tipe_kamar` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `status_kamar` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_kamar`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of kamar
@@ -124,19 +124,20 @@ CREATE TABLE `obat`  (
   `deskripsi` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `harga` decimal(10, 2) NULL DEFAULT NULL,
   `stok` int NOT NULL,
+  `foto_obat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_obat`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of obat
 -- ----------------------------
-INSERT INTO `obat` VALUES (1, 'Parasetamol', 'Untuk mengatasi demam dan sakit', 20000.00, 30);
-INSERT INTO `obat` VALUES (2, 'Ibuprofen', 'Untuk mengatasi rasa sakit, peradangan, dan demam', 40000.00, 20);
-INSERT INTO `obat` VALUES (3, 'Omeprazol', 'Untuk meredakan sakit maag dan asam lambung', 99000.00, 45);
-INSERT INTO `obat` VALUES (4, 'Amoksisilin', 'Antibiotik untuk infeksi bakteri', 119900.00, 24);
-INSERT INTO `obat` VALUES (5, 'Loratadin', 'Untuk alergi dan demam hay', 599900.00, 12);
-INSERT INTO `obat` VALUES (6, 'Aspirin', 'Untuk meredakan rasa sakit dan melancarkan peredaran darah', 499000.00, 24);
-INSERT INTO `obat` VALUES (7, 'Simvastatin', 'Untuk menurunkan kadar kolesterol', 299900.00, 29);
+INSERT INTO `obat` VALUES (1, 'Parasetamol', 'Untuk mengatasi demam dan sakit', 20000.00, 30, 'paracetamol.jpeg');
+INSERT INTO `obat` VALUES (2, 'Ibuprofen', 'Untuk mengatasi rasa sakit, peradangan, dan demam', 40000.00, 20, 'ibuprofen.jpeg');
+INSERT INTO `obat` VALUES (3, 'Omeprazol', 'Untuk meredakan sakit maag dan asam lambung', 99000.00, 45, 'omeprazole.jpeg');
+INSERT INTO `obat` VALUES (4, 'Amoksisilin', 'Antibiotik untuk infeksi bakteri', 119900.00, 24, 'amoxicillin.jpeg');
+INSERT INTO `obat` VALUES (5, 'Loratadin', 'Untuk alergi dan demam hay', 599900.00, 12, 'loratadine.jpg');
+INSERT INTO `obat` VALUES (6, 'Aspirin', 'Untuk meredakan rasa sakit dan melancarkan peredaran darah', 499000.00, 24, 'aspirine.jpeg');
+INSERT INTO `obat` VALUES (7, 'Simvastatin', 'Untuk menurunkan kadar kolesterol', 299900.00, 29, 'simvastatin.jpg');
 
 -- ----------------------------
 -- Table structure for pasien
@@ -150,7 +151,7 @@ CREATE TABLE `pasien`  (
   `jenis_kelamin_pasien` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `kontak_pasien` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_pasien`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pasien
@@ -171,7 +172,7 @@ CREATE TABLE `poliklinik`  (
   `nama_poliklinik` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deskripsi` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_poliklinik`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of poliklinik
@@ -197,7 +198,7 @@ CREATE TABLE `rawat_inap`  (
   INDEX `id_kamar`(`id_kamar` ASC) USING BTREE,
   CONSTRAINT `rawat_inap_ibfk_1` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `rawat_inap_ibfk_2` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id_kamar`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rawat_inap
@@ -222,7 +223,7 @@ CREATE TABLE `rekam_medis`  (
   INDEX `id_pasien`(`id_pasien` ASC) USING BTREE,
   CONSTRAINT `rekam_medis_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `rekam_medis_ibfk_2` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rekam_medis
@@ -230,7 +231,7 @@ CREATE TABLE `rekam_medis`  (
 INSERT INTO `rekam_medis` VALUES (1, '2023-03-11 08:00:00', 'Osteoartritis', 'Rutin untuk terapi dan jangan lupa untuk meminum obat yang di berikan', 16, 1);
 INSERT INTO `rekam_medis` VALUES (2, '2023-03-11 08:20:00', 'Rinitis Akut', 'Istirahat yang cukup dan banyak minum air putih', 16, 2);
 INSERT INTO `rekam_medis` VALUES (3, '2023-03-16 09:12:00', 'Hipersensitivitas Dentin', 'Jangan mengkonsumsi makanan atau minuman yang terlalu panas dan dingin atau rasa yang kuat', 2, 3);
-INSERT INTO `rekam_medis` VALUES (4, '2024-03-04 00:00:00', 'Keseleo', 'Hati-hati ketika berjalan', 4, 4);
+INSERT INTO `rekam_medis` VALUES (4, '2024-03-12 02:00:00', 'Cantengan', 'Hati-hati ketika potong kuku', 2, 2);
 
 -- ----------------------------
 -- Table structure for resep_obat
@@ -246,8 +247,8 @@ CREATE TABLE `resep_obat`  (
   INDEX `id_rekam_medis`(`id_rekam_medis` ASC) USING BTREE,
   INDEX `id_obat`(`id_obat` ASC) USING BTREE,
   CONSTRAINT `resep_obat_ibfk_1` FOREIGN KEY (`id_rekam_medis`) REFERENCES `rekam_medis` (`id_rekam_medis`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  CONSTRAINT `resep_obat_ibfk_2` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  CONSTRAINT `resep_obat_ibfk_2` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of resep_obat
@@ -256,5 +257,6 @@ INSERT INTO `resep_obat` VALUES (1, 12, '3x sehari', 1, 4);
 INSERT INTO `resep_obat` VALUES (2, 6, '2x sehari', 2, 1);
 INSERT INTO `resep_obat` VALUES (3, 15, '3x sehari', 3, 2);
 INSERT INTO `resep_obat` VALUES (4, 5, '3x sehari', 1, 7);
+INSERT INTO `resep_obat` VALUES (9, 2, '2x sehari', 4, 4);
 
 SET FOREIGN_KEY_CHECKS = 1;

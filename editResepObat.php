@@ -1,21 +1,42 @@
 <?php
     include('function.php');
 
-    if (isset($_POST['btn-add'])) {
-        // jalankan query tambah record baru
-        $isAddSucceed = addObat($_POST, $_FILES);
+    $listObat = readObat();
+
+    if(isset($_GET['id_resep_obat'])){
+      $idResepObat = $_GET['id_resep_obat'];
+      $data = readQuery('resep_obat', 'id_resep_obat', $idResepObat);
+      if(!count($data)){
+        echo "
+        <script>
+          alert('Data tidak ditemukan pada database');
+          window.location='admin.php';
+        </script>";
+      }
+    } else {
+      echo "
+      <script>
+        alert('Masukkan data id.');
+        window.location='admin.php';
+      </script>";
+    } 
+
+    if (isset($_POST['btn-edit-resep'])) {
+        // jalankan query edit record baru
+        $isAddSucceed = editResepObat($_POST);
+        $idRekamMedis = $_POST['id_rekam_medis'];
         if ($isAddSucceed > 0) {
             // jika penambahan sukses, tampilkan alert
             echo "
             <script>
-                alert('Data Berhasil Ditambahkan');
-                document.location.href = 'admin.php';
+                alert('Data Berhasil diubah');
+                document.location.href = 'resep_obat.php?id=$idRekamMedis';
             </script>";
         } else {
             echo "
             <script>
-                alert('Gagal menambahkan Data !');
-                document.location.href = 'admin.php';
+              alert('Tidak ada data yang diperbaharui !');
+              document.location.href = 'resep_obat.php?id=$idRekamMedis';
             </script>
             ";
         }
@@ -107,35 +128,33 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Tambah obat</h2>
+          <h2>Edit Resep Obat</h2>
         </div>
 
-        <form action="addObat.php" method="post" role="form" id="form-add" enctype="multipart/form-data">
-            <input type="hidden" name="id" id="id">
+        <form action="#" method="post" role="form" id="form-add" enctype="multipart/form-data">
+            <input type="hidden" name="id_resep_obat" id="id_resep_obat" value="<?= $data['id_resep_obat'] ?>">
+            <input type="hidden" name="id_rekam_medis" id="id_rekam_medis" value="<?= $data['id_rekam_medis'] ?>">
             <div class="mb-3">
-                <label for="nama_obat" class="form-label">Nama Obat</label>
-                <input type="text" class="form-control" id="nama_obat" name="nama_obat" required>
+                <label for="obat">Obat</label>
+                <select class="form-select" aria-label="Category" id="obat" name="obat" required>
+                    <?php
+                        foreach($listObat as $obat){
+                          echo '<option value="'.$obat['id_obat'].'"'. ($obat['id_obat'] == $data['id_obat'] ? "selected" : "").'>'.$obat['nama_obat'].'</option>';
+                        }
+                    ?>
+                </select>
             </div>
             <div class="mb-3">
-                <label for="deskripsi" class="form-label">Deskripsi</label>
-                <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
+                <label for="instruksi" class="form-label">Instruksi</label>
+                <input type="text" class="form-control" id="instruksi" name="instruksi" value="<?= $data['instruksi'] ?>" required>
             </div>
             <div class="mb-3">
-                <label for="harga" class="form-label">Harga</label>
-                <input type="text" class="form-control" id="harga" name="harga" required>
-            </div>
-            <div class="mb-3">
-                <label for="stok" class="form-label">Stok</label>
-                <input type="text" class="form-control" id="stok" name="stok" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="foto_obat" class="form-label">Foto Obat</label>
-                <input class="form-control" type="file" id="foto_obat" name="foto_obat" required>
+                <label for="jumlah" class="form-label">Jumlah</label>
+                <input type="text" class="form-control" id="jumlah" name="jumlah" value="<?= $data['jumlah'] ?>" required>
             </div>
 
             <a href="admin.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
-            <button type="submit" class="btn btn-primary text-white" name="btn-add" id="btn-add" form="form-add">Tambah Obat</button>
+            <button type="submit" class="btn btn-primary text-white" name="btn-edit-resep" id="btn-edit-resep" form="form-add">Edit Resep Obat</button>
         </form>
 
       </div>

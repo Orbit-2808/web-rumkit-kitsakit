@@ -55,26 +55,13 @@
         return $result;
     }
 
-    function countDepartmen(){
+    function readPasien(){
         global $conn;
 
-        $query = "SELECT COUNT(id_departmen) as count FROM departmen";
+        $query = "SELECT * FROM pasien";
         $result = mysqli_query($conn, $query);
 
-        $count = mysqli_fetch_assoc($result);
-
-        return $count['count'];
-    }
-
-    function countDokter(){
-        global $conn;
-
-        $query = "SELECT COUNT(id_dokter) as count FROM dokter";
-        $result = mysqli_query($conn, $query);
-
-        $count = mysqli_fetch_assoc($result);
-
-        return $count['count'];
+        return $result;
     }
 
     function readQuery($table, $id, $find){
@@ -201,6 +188,91 @@
         global $conn;
 
         $query = "DELETE FROM obat WHERE id_obat = '$id'";
+        $result = mysqli_query($conn, $query);
+
+        $isSucceed = mysqli_affected_rows($conn);
+        return $isSucceed;
+    }
+    
+    function addRekamMedis($data){
+        global $conn;
+        
+        $tempTanggal = $data['tanggal'];
+        $tanggal = date("Y-m-d H:i:s",strtotime($tempTanggal));
+        $diagnosa = $data['diagnosa'];
+        $catatan = $data['catatan'];
+        $idDokter = $data['dokter'];
+        $idPasien = $data['pasien'];
+        
+        $query = "INSERT INTO rekam_medis VALUES('', '$tanggal', '$diagnosa', '$catatan', '$idDokter', '$idPasien')";
+        $result = mysqli_query($conn, $query);
+        
+        $isSucceed = mysqli_affected_rows($conn);
+        return $isSucceed;
+    }
+
+    function editRekamMedis($data){
+        global $conn;
+
+        $id = $data['id'];
+        $tempTanggal = $data['tanggal'];
+        $tanggal = date("Y-m-d H:i:s",strtotime($tempTanggal));
+        $diagnosa = $data['diagnosa'];
+        $catatan = $data['catatan'];
+        $idDokter = $data['dokter'];
+        $idPasien = $data['pasien'];
+
+        $query = "UPDATE rekam_medis SET tanggal = '$tanggal', diagnosa = '$diagnosa', catatan = '$catatan', id_dokter = '$idDokter', id_pasien = '$idPasien' WHERE id_rekam_medis = '$id'";
+        $result = mysqli_query($conn, $query);
+        
+        $isSucceed = mysqli_affected_rows($conn);
+        return $isSucceed;
+    }
+    
+    function deleteRekamMedis($id){
+        global $conn;
+        
+        $query = "DELETE FROM rekam_medis WHERE id_rekam_medis = '$id'";
+        $result = mysqli_query($conn, $query);
+        
+        $isSucceed = mysqli_affected_rows($conn);
+        return $isSucceed;
+    }
+    
+    function addResepObat($data){
+        global $conn;
+        
+        $jumlah = $data['jumlah'];
+        $instruksi = $data['instruksi'];
+        $idRekamMedis = $data['id_rekam_medis'];
+        $idObat = $data['obat'];
+        
+        $query = "INSERT INTO resep_obat VALUES ('', '$jumlah', '$instruksi', '$idRekamMedis', '$idObat')";
+        $result = mysqli_query($conn, $query);
+        
+        $isSucceed = mysqli_affected_rows($conn);
+        return $isSucceed;
+    }
+
+    function editResepObat($data){
+        global $conn;
+
+        $idResepObat = $data['id_resep_obat'];
+        $obat = $data['obat'];
+        $instruksi = $data['instruksi'];
+        $jumlah = $data['jumlah'];
+
+        $query = "UPDATE resep_obat SET instruksi = '$instruksi', jumlah = '$jumlah', id_obat = '$obat' WHERE id_resep_obat = '$idResepObat'";
+        $result = mysqli_query($conn, $query);
+        
+        $isSucceed = mysqli_affected_rows($conn);
+        return $isSucceed;
+    }
+    
+    function deleteResepObat($id){
+        global $conn;
+
+        $query = "DELETE FROM resep_obat WHERE id_resep_obat = '$id'";
         $result = mysqli_query($conn, $query);
 
         $isSucceed = mysqli_affected_rows($conn);

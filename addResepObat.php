@@ -1,21 +1,25 @@
 <?php
     include('function.php');
 
+    $idRekamMedis = $_GET['id'];
+    $listObat = readObat();
+
     if (isset($_POST['btn-add'])) {
         // jalankan query tambah record baru
-        $isAddSucceed = addObat($_POST, $_FILES);
+        $isAddSucceed = addResepObat($_POST);
+        $idRekamMedis = $_POST['id_rekam_medis'];
         if ($isAddSucceed > 0) {
             // jika penambahan sukses, tampilkan alert
             echo "
             <script>
                 alert('Data Berhasil Ditambahkan');
-                document.location.href = 'admin.php';
+                document.location.href = 'resep_obat.php?id=$idRekamMedis';
             </script>";
         } else {
             echo "
             <script>
                 alert('Gagal menambahkan Data !');
-                document.location.href = 'admin.php';
+                document.location.href = 'resep_obat.php?id=$idRekamMedis';
             </script>
             ";
         }
@@ -107,35 +111,33 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Tambah obat</h2>
+          <h2>Tambah Resep Obat</h2>
         </div>
 
-        <form action="addObat.php" method="post" role="form" id="form-add" enctype="multipart/form-data">
-            <input type="hidden" name="id" id="id">
+        <form action="addResepObat.php" method="post" role="form" id="form-add" enctype="multipart/form-data">
+            <input type="hidden" name="id_rekam_medis" id="id_rekam_medis" value="<?= $idRekamMedis ?>">
             <div class="mb-3">
-                <label for="nama_obat" class="form-label">Nama Obat</label>
-                <input type="text" class="form-control" id="nama_obat" name="nama_obat" required>
+                <label for="obat">Obat</label>
+                <select class="form-select" aria-label="Category" id="obat" name="obat" required>
+                    <option value="" selected disabled hidden>Pilih</option>
+                    <?php
+                        foreach($listObat as $obat){
+                            echo '<option value="'.$obat['id_obat'].'">'.$obat['nama_obat'].'</option>';
+                        }
+                    ?>
+                </select>
             </div>
             <div class="mb-3">
-                <label for="deskripsi" class="form-label">Deskripsi</label>
-                <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
+                <label for="instruksi" class="form-label">Instruksi</label>
+                <input type="text" class="form-control" id="instruksi" name="instruksi" required>
             </div>
             <div class="mb-3">
-                <label for="harga" class="form-label">Harga</label>
-                <input type="text" class="form-control" id="harga" name="harga" required>
-            </div>
-            <div class="mb-3">
-                <label for="stok" class="form-label">Stok</label>
-                <input type="text" class="form-control" id="stok" name="stok" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="foto_obat" class="form-label">Foto Obat</label>
-                <input class="form-control" type="file" id="foto_obat" name="foto_obat" required>
+                <label for="jumlah" class="form-label">Jumlah</label>
+                <input type="text" class="form-control" id="jumlah" name="jumlah" required>
             </div>
 
             <a href="admin.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
-            <button type="submit" class="btn btn-primary text-white" name="btn-add" id="btn-add" form="form-add">Tambah Obat</button>
+            <button type="submit" class="btn btn-primary text-white" name="btn-add" id="btn-add" form="form-add">Tambah Resep Obat</button>
         </form>
 
       </div>

@@ -127,7 +127,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Tambah Dokter</h2>
+          <h2>Edit Dokter</h2>
         </div>
 
         <form action="#" method="post" role="form" id="form-add" enctype="multipart/form-data">
