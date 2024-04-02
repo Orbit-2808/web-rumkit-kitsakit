@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 01/04/2024 11:49:25
+ Date: 02/04/2024 14:17:27
 */
 
 SET NAMES utf8mb4;
@@ -56,7 +56,7 @@ CREATE TABLE `dokter`  (
   PRIMARY KEY (`id_dokter`) USING BTREE,
   INDEX `id_departmen`(`id_departmen` ASC) USING BTREE,
   CONSTRAINT `dokter_ibfk_1` FOREIGN KEY (`id_departmen`) REFERENCES `departmen` (`id_departmen`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of dokter
@@ -79,18 +79,18 @@ CREATE TABLE `jadwal_praktek`  (
   `id_dokter` int NOT NULL,
   `id_poliklinik` int NOT NULL,
   PRIMARY KEY (`id_jadwal`) USING BTREE,
-  INDEX `id_dokter`(`id_dokter` ASC) USING BTREE,
   INDEX `id_poliklinik`(`id_poliklinik` ASC) USING BTREE,
-  CONSTRAINT `jadwal_praktek_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `jadwal_praktek_ibfk_2` FOREIGN KEY (`id_poliklinik`) REFERENCES `poliklinik` (`id_poliklinik`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  INDEX `id_dokter`(`id_dokter` ASC) USING BTREE,
+  CONSTRAINT `jadwal_praktek_ibfk_2` FOREIGN KEY (`id_poliklinik`) REFERENCES `poliklinik` (`id_poliklinik`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `jadwal_praktek_ibfk_3` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of jadwal_praktek
 -- ----------------------------
-INSERT INTO `jadwal_praktek` VALUES (1, 'Senin', '08:00:00', '15:00:00', 1, 1);
-INSERT INTO `jadwal_praktek` VALUES (2, 'Jumat', '09:00:00', '17:00:00', 2, 2);
-INSERT INTO `jadwal_praktek` VALUES (3, 'Sabtu', '08:00:00', '14:00:00', 3, 3);
+INSERT INTO `jadwal_praktek` VALUES (4, 'Senin', '08:00:00', '15:00:00', 2, 1);
+INSERT INTO `jadwal_praktek` VALUES (6, 'Jumat', '09:00:00', '17:00:00', 2, 2);
+INSERT INTO `jadwal_praktek` VALUES (7, 'Sabtu', '08:00:00', '14:00:00', 3, 3);
 
 -- ----------------------------
 -- Table structure for kamar
@@ -220,9 +220,9 @@ CREATE TABLE `rekam_medis`  (
   PRIMARY KEY (`id_rekam_medis`) USING BTREE,
   INDEX `id_dokter`(`id_dokter` ASC) USING BTREE,
   INDEX `id_pasien`(`id_pasien` ASC) USING BTREE,
-  CONSTRAINT `rekam_medis_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `rekam_medis_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `rekam_medis_ibfk_2` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of rekam_medis
@@ -245,7 +245,7 @@ CREATE TABLE `resep_obat`  (
   PRIMARY KEY (`id_resep_obat`) USING BTREE,
   INDEX `id_rekam_medis`(`id_rekam_medis` ASC) USING BTREE,
   INDEX `id_obat`(`id_obat` ASC) USING BTREE,
-  CONSTRAINT `resep_obat_ibfk_1` FOREIGN KEY (`id_rekam_medis`) REFERENCES `rekam_medis` (`id_rekam_medis`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `resep_obat_ibfk_1` FOREIGN KEY (`id_rekam_medis`) REFERENCES `rekam_medis` (`id_rekam_medis`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `resep_obat_ibfk_2` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 

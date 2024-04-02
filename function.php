@@ -76,4 +76,75 @@
 
         return $count['count'];
     }
+
+    function readQuery($table, $id, $find){
+        global $conn;
+        $query = "SELECT * FROM ".$table." WHERE ".$id."=".$find;
+        $result = mysqli_query($conn, $query);
+        $result = mysqli_fetch_assoc($result);
+
+        return $result;
+    };
+
+    function addDokter($data, $file){
+        global $conn;
+
+        $namaFoto = $file['foto_dokter']['name'];
+        $tempNamaFoto = $file['foto_dokter']['tmp_name'];
+        $direktori = 'assets/img/doctors/'.$namaFoto;
+        $isMoved = move_uploaded_file($tempNamaFoto, $direktori);
+        if(!$isMoved){
+            $namaFoto = 'default.jpg';
+        }
+
+        $namaDokter = $data['nama_dokter'];
+        $jenisKelamin = $data['jenis_kelamin_dokter'];
+        $alamat = $data['alamat_dokter'];
+        $noTelp = $data['no_telp_dokter'];
+        $idDepartmen = $data['departmen'];
+
+        $query = "INSERT INTO dokter VALUES('', '$namaDokter', '$jenisKelamin', '$alamat', '$noTelp', '$namaFoto', '$idDepartmen')";
+        $result = mysqli_query($conn, $query);
+
+        $isSucceed = mysqli_affected_rows($conn);
+
+        return $isSucceed;
+    }
+
+    function editDokter($data, $file){
+        global $conn;
+
+        $id = $data['id'];
+        $namaDokter = $data['nama_dokter'];
+        $jenisKelamin = $data['jenis_kelamin_dokter'];
+        $alamat = $data['alamat_dokter'];
+        $noTelp = $data['no_telp_dokter'];
+        $idDepartmen = $data['departmen'];
+        $namaFoto = $file['foto_dokter']['name'];
+
+        if($namaFoto != ""){
+            $tempNamaFoto = $file['foto_dokter']['tmp_name'];
+            $direktori = 'assets/img/doctors/'.$namaFoto;
+            move_uploaded_file($tempNamaFoto, $direktori);
+            $query = "UPDATE dokter SET nama_dokter = '$namaDokter', jenis_kelamin_dokter = '$jenisKelamin', alamat_dokter = '$alamat', telefon_dokter = '$noTelp', id_departmen = '$idDepartmen', foto='$namaFoto' WHERE id_dokter = '$id'";
+            $result = mysqli_query($conn, $query);
+        } else{
+            $query = "UPDATE dokter SET nama_dokter = '$namaDokter', jenis_kelamin_dokter = '$jenisKelamin', alamat_dokter = '$alamat', telefon_dokter = '$noTelp', id_departmen = '$idDepartmen' WHERE id_dokter = '$id'";
+            $result = mysqli_query($conn, $query);
+        }
+
+        $isSucceed = mysqli_affected_rows($conn);
+        return $isSucceed;
+    }
+
+    function deleteDokter($id){
+        global $conn;
+
+        $query = "DELETE FROM dokter WHERE id_dokter=".$id;
+        $result = mysqli_query($conn, $query);
+
+        $isSucceed = mysqli_affected_rows($conn);
+
+        return $isSucceed;
+    }
 ?>

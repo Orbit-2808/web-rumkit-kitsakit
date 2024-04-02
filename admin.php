@@ -282,11 +282,10 @@
 
         <div class="section-title">
           <h2>Doctors</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <a href="addDokter.php" class="btn btn-success">+ Add Dokter</a>
         </div>
 
         <div class="row">
-          
           <?php
             foreach($listDokter as $dokter){
           ?>
@@ -296,6 +295,8 @@
               <div class="member-info">
                 <h4><?= $dokter['nama_dokter'] ?></h4>
                 <p><?= $dokter['spesialisasi'] ?></p>
+                <a href="editDokter.php?id_dokter=<?=$dokter['id_dokter']?>" class="link-warning"><i class="bi bi-pencil-square">Edit</i></a>
+                <a href="delete.php?id=<?=$dokter['id_dokter']?>" onclick="return confirm('Yakin Hapus?')" class="link-danger"><i class="bi bi-trash3">Delete</i></a>
               </div>
             </div>
           </div>
