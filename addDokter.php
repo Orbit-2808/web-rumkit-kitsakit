@@ -16,8 +16,8 @@
         } else {
             echo "
             <script>
-            alert('Gagal menambahkan Data !');
-            document.location.href = 'admin.php';
+                alert('Gagal menambahkan Data !');
+                document.location.href = 'admin.php';
             </script>
             ";
         }
@@ -93,13 +93,11 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto" href="#services">Departments</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#appointment" class="appointment-btn scrollto">Admin <span class="d-none d-md-inline">Page</span></a>
+      <a href="admin.php" class="appointment-btn scrollto">Admin <span class="d-none d-md-inline">Page</span></a>
 
     </div>
   </header><!-- End Header -->

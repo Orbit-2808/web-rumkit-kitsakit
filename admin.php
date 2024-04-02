@@ -140,7 +140,7 @@
 
         <div class="section-title">
           <h2>Obat</h2>
-          <p>List obat unyuuu</p>
+          <a href="addObat.php" class="btn btn-success">+ Add Obat</a>
         </div>
 
         <table class="table table-bordered table-striped table-hover">
@@ -151,6 +151,8 @@
                     <th scope="col">Deskripsi</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Stok</th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -164,7 +166,17 @@
                     <td><?= $obat['deskripsi'] ?></td>
                     <td>Rp<?=number_format($obat['harga'],0,"",".")?></td>
                     <td><?= $obat['stok'] ?></td>
-                    <!-- <td><a href="resep_obat.php?id=<?= $obat['id_rekam_medis'] ?>">Lihat Resep Obat</a></td> -->
+                    <td>
+                        <div class="gallery-item">
+                            <a href="assets/img/obat/<?= $obat['foto_obat'] ?>" class="galelry-lightbox">
+                                <img src="assets/img/obat/<?= $obat['foto_obat'] ?>" alt="Obat" width="75px">
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="editObat.php?id_obat=<?=$obat['id_obat']?>" class="link-warning"><i class="bi bi-pencil-square">Edit</i></a>
+                        <a href="delete.php?id=<?=$obat['id_obat']?>&type=2" onclick="return confirm('Yakin Hapus?')" class="link-danger"><i class="bi bi-trash3">Delete</i></a>
+                    </td>
                 </tr>
             <?php
                 $no = $no + 1;
@@ -177,7 +189,7 @@
     </section><!-- Obat Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="departments" class="services">
+    <!-- <section id="departments" class="services">
       <div class="container">
 
         <div class="section-title">
@@ -192,8 +204,6 @@
           ?>
             <div class="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-mg-0">
               <div class="icon-box">
-                <!-- <div class="icon"><i class="fas fa-pills"></i></div> -->
-                <!-- <div><img style="width:100%; max-width:180px;" src="assets/img/departments-1.jpg" alt="<?= $departmen['nama_departmen'] ?>"></div> -->
                 <h4><a href=""><span><?= $departmen['nama_departmen'] ?></span></a></h4>
                 <?php
                   foreach($listDokterDepartmen as $dokterDepartmen){
@@ -209,72 +219,8 @@
         </div>
 
       </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Appointment Section ======= -->
-    <!-- <section id="appointment" class="appointment section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Make an Appointment</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
-          <div class="row">
-            <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 form-group mt-3">
-              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3">
-              <select name="department" id="department" class="form-select">
-                <option value="">Select Department</option>
-                <option value="Department 1">Department 1</option>
-                <option value="Department 2">Department 2</option>
-                <option value="Department 3">Department 3</option>
-              </select>
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3">
-              <select name="doctor" id="doctor" class="form-select">
-                <option value="">Select Doctor</option>
-                <option value="Doctor 1">Doctor 1</option>
-                <option value="Doctor 2">Doctor 2</option>
-                <option value="Doctor 3">Doctor 3</option>
-              </select>
-              <div class="validate"></div>
-            </div>
-          </div>
-
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
-            <div class="validate"></div>
-          </div>
-          <div class="mb-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-          </div>
-          <div class="text-center"><button type="submit">Make an Appointment</button></div>
-        </form>
-
-      </div>
     </section> -->
-    <!-- End Appointment Section -->
+    <!-- End Services Section -->
 
     <!-- ======= Doctors Section ======= -->
     <section id="doctors" class="doctors section-bg">
@@ -296,64 +242,13 @@
                 <h4><?= $dokter['nama_dokter'] ?></h4>
                 <p><?= $dokter['spesialisasi'] ?></p>
                 <a href="editDokter.php?id_dokter=<?=$dokter['id_dokter']?>" class="link-warning"><i class="bi bi-pencil-square">Edit</i></a>
-                <a href="delete.php?id=<?=$dokter['id_dokter']?>" onclick="return confirm('Yakin Hapus?')" class="link-danger"><i class="bi bi-trash3">Delete</i></a>
+                <a href="delete.php?id=<?=$dokter['id_dokter']?>&type=1" onclick="return confirm('Yakin Hapus?')" class="link-danger"><i class="bi bi-trash3">Delete</i></a>
               </div>
             </div>
           </div>
           <?php
             }
           ?>
-
-          <!-- <div class="col-lg-6 mt-4 mt-lg-0">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Anesthesiologist</span>
-                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/doctors/doctors-3.jpg" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>Cardiology</span>
-                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-4">
-            <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/doctors/doctors-4.jpg" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Neurosurgeon</span>
-                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                </div>
-              </div>
-            </div>
-          </div> -->
 
         </div>
 

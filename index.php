@@ -243,7 +243,7 @@
           ?>
           <div class="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-mg-0">
               <div class="card" style="width: 18rem;">
-                  <img class="card-img-top" src="assets/img/gallery/gallery-1.jpg" alt="Obat">
+                  <img class="card-img-top" src="assets/img/obat/<?= $obat['foto_obat'] ?>" alt="Obat">
                   <div class="card-body">
                       <h5 class="card-title"><?= $obat['nama_obat'] ?></h5>
                       <p class="card-text"><?= $obat['deskripsi'] ?></p>
@@ -267,7 +267,7 @@
     </section><!-- End Services Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="departments" class="services">
+    <!-- <section id="departments" class="services">
       <div class="container">
 
         <div class="section-title">
@@ -282,8 +282,6 @@
           ?>
             <div class="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-mg-0">
               <div class="icon-box">
-                <!-- <div class="icon"><i class="fas fa-pills"></i></div> -->
-                <!-- <div><img style="width:100%; max-width:180px;" src="assets/img/departments-1.jpg" alt="<?= $departmen['nama_departmen'] ?>"></div> -->
                 <h4><a href=""><span><?= $departmen['nama_departmen'] ?></span></a></h4>
                 <?php
                   foreach($listDokterDepartmen as $dokterDepartmen){
@@ -296,42 +294,11 @@
             }
           ?> 
 
-          <!-- <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-hospital-user"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-dna"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-wheelchair"></i></div>
-              <h4><a href="">Dele cardo</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-notes-medical"></i></div>
-              <h4><a href="">Divera don</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-            </div>
-          </div> -->
-
         </div>
 
       </div>
-    </section><!-- End Services Section -->
+    </section> -->
+    <!-- End Services Section -->
 
     <!-- ======= Appointment Section ======= -->
     <!-- <section id="appointment" class="appointment section-bg">

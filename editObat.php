@@ -1,11 +1,9 @@
 <?php
     include('function.php');
 
-    $listDepartmen = readDepartmen();
-
-    if(isset($_GET['id_dokter'])){
-      $idDokter = $_GET['id_dokter'];
-      $data = readQuery('dokter', 'id_dokter', $idDokter);
+    if(isset($_GET['id_obat'])){
+      $idObat = $_GET['id_obat'];
+      $data = readQuery('obat', 'id_obat', $idObat);
       if(!count($data)){
         echo "
         <script>
@@ -21,9 +19,9 @@
       </script>";
     } 
 
-    if (isset($_POST['btn-edit-dokter'])) {
+    if (isset($_POST['btn-edit-obat'])) {
         // jalankan query edit record baru
-        $isAddSucceed = editDokter($_POST, $_FILES);
+        $isAddSucceed = editObat($_POST, $_FILES);
         if ($isAddSucceed > 0) {
             // jika penambahan sukses, tampilkan alert
             echo "
@@ -127,64 +125,37 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Tambah Dokter</h2>
+          <h2>Edit Obat</h2>
         </div>
 
         <form action="#" method="post" role="form" id="form-add" enctype="multipart/form-data">
-            <input type="hidden" name="id" id="id" value="<?= $data['id_dokter'] ?>">
+            <input type="hidden" name="id" id="id" value="<?= $data['id_obat'] ?>">
             <div class="mb-3">
-                <label for="nama_dokter" class="form-label">Nama Chef</label>
-                <input type="text" class="form-control" id="nama_dokter" name="nama_dokter" value="<?= $data['nama_dokter'] ?>" required>
+                <label for="nama_obat" class="form-label">Nama Obat</label>
+                <input type="text" class="form-control" id="nama_obat" name="nama_obat" value="<?= $data['nama_obat'] ?>" required>
             </div>
             <div class="mb-3">
-                <label for="no_telp_dokter" class="form-label">No Telp</label>
-                <input type="text" class="form-control" id="no_telp_dokter" name="no_telp_dokter" value="<?= $data['telefon_dokter'] ?>" required>
+                <label for="deskripsi" class="form-label">Deskripsi</label>
+                <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?= $data['deskripsi'] ?>" required>
             </div>
             <div class="mb-3">
-                <label for="alamat_dokter" class="form-label">Alamat</label>
-                <input type="text" class="form-control" id="alamat_dokter" name="alamat_dokter" value="<?= $data['alamat_dokter'] ?>" required>
+                <label for="harga" class="form-label">Harga</label>
+                <input type="text" class="form-control" id="harga" name="harga" value="<?= $data['harga'] ?>" required>
             </div>
-
             <div class="mb-3">
-                <label for="jenis_kelamin_dokter">Jenis Kelamin</label>
-                <select class="form-select" aria-label="Category" id="jenis_kelamin_dokter" name="jenis_kelamin_dokter" required>
-                    <option value="P" 
-                      <?php
-                        if($data['jenis_kelamin_dokter'] == "P"){
-                          echo "selected";
-                        }
-                      ?>
-                    >Perempuan</option>
-                    <option value="L"
-                      <?php
-                        if($data['jenis_kelamin_dokter'] == "L"){
-                          echo "selected";
-                        }
-                      ?>
-                    >Laki-laki</option>
-                </select>
+                <label for="stok" class="form-label">Stok</label>
+                <input type="text" class="form-control" id="stok" name="stok" value="<?= $data['stok'] ?>" required>
             </div>
 
             <div class="mb-3">
-                <label for="departmen">Department</label>
-                <select class="form-select" aria-label="Category" id="departmen" name="departmen" required>
-                    <?php
-                        foreach($listDepartmen as $departmen){
-                            echo '<option value="'.$departmen['id_departmen'].'"'. ($departmen['id_departmen'] == $data['id_departmen'] ? "selected" : "").'>'.$departmen['nama_departmen'].'</option>';
-                        }
-                    ?>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <img src="assets/img/doctors/<?=$data['foto'] ?>" alt="" width="300" height="300">
+                <img src="assets/img/obat/<?=$data['foto_obat'] ?>" alt="" width="300" height="300">
                 <br>
-                <label for="foto_chef" class="form-label">Abaikan Jika tidak mengganti foto</label>
-                <input class="form-control" type="file" id="foto_dokter" name="foto_dokter">
+                <label for="foto_obat" class="form-label">Abaikan Jika tidak mengganti foto</label>
+                <input class="form-control" type="file" id="foto_obat" name="foto_obat">
             </div>
 
             <a href="admin.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
-            <button type="submit" class="btn btn-primary text-white" name="btn-edit-dokter" id="btn-edit-dokter" form="form-add">Update Dokter</button>
+            <button type="submit" class="btn btn-primary text-white" name="btn-edit-obat" id="btn-edit-obat" form="form-add">Update Obat</button>
         </form>
 
       </div>

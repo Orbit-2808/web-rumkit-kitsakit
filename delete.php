@@ -2,12 +2,11 @@
     include('function.php');
 
     $id = $_GET['id'];
-    // $type = $_GET['type'];
+    $type = $_GET['type'];
     if ($id > 0) {
-        // if($type == 1) $isDeleteSucceed = deleteMenu($id); 
-        // else if($type == 2) $isDeleteSucceed = deleteBahan($id);
+        if($type == 1) $isDeleteSucceed = deleteDokter($id); 
+        else if($type == 2) $isDeleteSucceed = deleteObat($id);
         // else if($type == 3) $isDeleteSucceed = deleteChef($id);
-        $isDeleteSucceed = deleteDokter($id);
 
         if ($isDeleteSucceed > 0) {
         echo "
