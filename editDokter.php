@@ -23,7 +23,7 @@
 
     if (isset($_POST['btn-edit-dokter'])) {
         // jalankan query edit record baru
-        $isAddSucceed = editDokter($_POST, $_FILES);
+        $isAddSucceed = updateDokter($_POST, $_FILES);
         if ($isAddSucceed > 0) {
             // jika penambahan sukses, tampilkan alert
             echo "

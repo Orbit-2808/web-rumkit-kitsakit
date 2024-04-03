@@ -21,7 +21,7 @@
 
     if (isset($_POST['btn-edit-obat'])) {
         // jalankan query edit record baru
-        $isAddSucceed = editObat($_POST, $_FILES);
+        $isAddSucceed = updateObat($_POST, $_FILES);
         if ($isAddSucceed > 0) {
             // jika penambahan sukses, tampilkan alert
             echo "

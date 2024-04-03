@@ -24,7 +24,7 @@
 
     if (isset($_POST['btn-edit-rekam'])) {
         // jalankan query edit record baru
-        $isAddSucceed = editRekamMedis($_POST, $_FILES);
+        $isAddSucceed = updateRekamMedis($_POST, $_FILES);
         if ($isAddSucceed > 0) {
             // jika penambahan sukses, tampilkan alert
             echo "
@@ -138,7 +138,7 @@
                 <select class="form-select" aria-label="Category" id="dokter" name="dokter" required>
                     <?php
                         foreach($listDokter as $dokter){
-                            echo '<option value="'.$dokter['id_dokter'].'"'. ($dokter['id_dokter'] == $data['id_dokter'] ? "selected" : "").'>'.$dokter['nama_dokter'].'</option>';
+                            echo '<option value="'.$dokter['id_dokter'].'"'. ($dokter['id_dokter'] == $data['id_dokter'] ? "selected" : "").'>'.$dokter['nama_dokter'].' | '.$dokter['spesialisasi'].'</option>';
                         }
                     ?>
                 </select>

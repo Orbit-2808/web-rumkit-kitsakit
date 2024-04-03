@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 100432 (10.4.32-MariaDB)
  Source Host           : localhost:3306
- Source Schema         : db_rumah_sakit
+ Source Schema         : kitsakit
 
  Target Server Type    : MySQL
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 03/04/2024 02:17:29
+ Date: 03/04/2024 18:41:04
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `departmen`  (
   `spesialisasi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lokasi` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_departmen`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of departmen
@@ -40,6 +40,7 @@ INSERT INTO `departmen` VALUES (5, 'Pediatrics', 'Pediatric Surgeon', 'Children 
 INSERT INTO `departmen` VALUES (6, 'Neurology', 'Neurologist', 'Neurological Center');
 INSERT INTO `departmen` VALUES (7, 'Orthopedics', 'Orthopedic Surgeon', 'Orthopedic Wing');
 INSERT INTO `departmen` VALUES (9, 'ENT', 'ENT Specialist', 'ENT building');
+INSERT INTO `departmen` VALUES (10, 'Dental', 'Dentist', 'Dental building');
 
 -- ----------------------------
 -- Table structure for dokter
@@ -56,16 +57,16 @@ CREATE TABLE `dokter`  (
   PRIMARY KEY (`id_dokter`) USING BTREE,
   INDEX `id_departmen`(`id_departmen` ASC) USING BTREE,
   CONSTRAINT `dokter_ibfk_1` FOREIGN KEY (`id_departmen`) REFERENCES `departmen` (`id_departmen`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dokter
 -- ----------------------------
-INSERT INTO `dokter` VALUES (2, 'Ayay Polynomial', 'P', 'Akihabara, Japan', '081384758358', 'doctors-1.jpg', 6);
-INSERT INTO `dokter` VALUES (3, 'Iduy Flutter', 'L', 'Britannia, Holy Britannian Empire', '082917483746', 'doctors-2.jpg', 2);
-INSERT INTO `dokter` VALUES (4, 'Alal Hadoop', 'L', 'Mars, Tijuana, Earth', '082389298348', 'doctors-3.jpg', 7);
-INSERT INTO `dokter` VALUES (11, 'Dimas Anjaymabar', 'L', 'Depok, Indonesia', '081283234345', 'doctors-4.jpg', 1);
-INSERT INTO `dokter` VALUES (16, 'sep asep', 'L', 'Bandung, Indonesia', '081282220576', 'doctors-5.jpg', 9);
+INSERT INTO `dokter` VALUES (1, 'Udin Suganda', 'L', 'Bandung, Indonesia', '081282220576', 'doctors-1.jpg', 9);
+INSERT INTO `dokter` VALUES (2, 'Siti Sukijan', 'P', 'Akihabara, Japan', '081384758358', 'doctors-2.jpg', 6);
+INSERT INTO `dokter` VALUES (3, 'Ucup Sutrisno', 'L', 'Britannia, Holy Britannian Empire', '082917483746', 'doctors-3.jpg', 10);
+INSERT INTO `dokter` VALUES (4, 'Sri Spakbor', 'P', 'Mars, Tijuana, Earth', '082389298348', 'doctors-4.jpg', 7);
+INSERT INTO `dokter` VALUES (5, 'Dimas Anjaymabar', 'L', 'Depok, Indonesia', '081283234345', 'doctors-5.jpg', 5);
 
 -- ----------------------------
 -- Table structure for jadwal_praktek
@@ -221,17 +222,18 @@ CREATE TABLE `rekam_medis`  (
   PRIMARY KEY (`id_rekam_medis`) USING BTREE,
   INDEX `id_dokter`(`id_dokter` ASC) USING BTREE,
   INDEX `id_pasien`(`id_pasien` ASC) USING BTREE,
-  CONSTRAINT `rekam_medis_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `rekam_medis_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `rekam_medis_ibfk_2` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rekam_medis
 -- ----------------------------
-INSERT INTO `rekam_medis` VALUES (1, '2023-03-11 08:00:00', 'Osteoartritis', 'Rutin untuk terapi dan jangan lupa untuk meminum obat yang di berikan', 16, 1);
-INSERT INTO `rekam_medis` VALUES (2, '2023-03-11 08:20:00', 'Rinitis Akut', 'Istirahat yang cukup dan banyak minum air putih', 16, 2);
-INSERT INTO `rekam_medis` VALUES (3, '2023-03-16 09:12:00', 'Hipersensitivitas Dentin', 'Jangan mengkonsumsi makanan atau minuman yang terlalu panas dan dingin atau rasa yang kuat', 2, 3);
-INSERT INTO `rekam_medis` VALUES (4, '2024-03-12 02:00:00', 'Cantengan', 'Hati-hati ketika potong kuku', 2, 2);
+INSERT INTO `rekam_medis` VALUES (1, '2023-03-11 08:00:00', 'Osteoartritis', 'Rutin untuk terapi dan jangan lupa untuk meminum obat yang di berikan', 4, 1);
+INSERT INTO `rekam_medis` VALUES (2, '2023-03-11 08:20:00', 'Rinitis Akut', 'Istirahat yang cukup dan banyak minum air putih', 1, 2);
+INSERT INTO `rekam_medis` VALUES (3, '2023-03-16 09:12:00', 'Hipersensitivitas Dentin', 'Jangan mengkonsumsi makanan atau minuman yang terlalu panas dan dingin atau rasa yang kuat', 3, 3);
+INSERT INTO `rekam_medis` VALUES (4, '2024-03-12 02:00:00', 'Stunting', 'Jangan lupa makan siang gratis', 5, 6);
+INSERT INTO `rekam_medis` VALUES (5, '2024-03-12 02:00:00', 'Saraf kejepit', 'Jangan terlalu banyak bergerak', 2, 2);
 
 -- ----------------------------
 -- Table structure for resep_obat
@@ -246,9 +248,9 @@ CREATE TABLE `resep_obat`  (
   PRIMARY KEY (`id_resep_obat`) USING BTREE,
   INDEX `id_rekam_medis`(`id_rekam_medis` ASC) USING BTREE,
   INDEX `id_obat`(`id_obat` ASC) USING BTREE,
-  CONSTRAINT `resep_obat_ibfk_1` FOREIGN KEY (`id_rekam_medis`) REFERENCES `rekam_medis` (`id_rekam_medis`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  CONSTRAINT `resep_obat_ibfk_2` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+  CONSTRAINT `resep_obat_ibfk_1` FOREIGN KEY (`id_rekam_medis`) REFERENCES `rekam_medis` (`id_rekam_medis`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `resep_obat_ibfk_2` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of resep_obat
@@ -258,5 +260,7 @@ INSERT INTO `resep_obat` VALUES (2, 6, '2x sehari', 2, 1);
 INSERT INTO `resep_obat` VALUES (3, 15, '3x sehari', 3, 2);
 INSERT INTO `resep_obat` VALUES (4, 5, '3x sehari', 1, 7);
 INSERT INTO `resep_obat` VALUES (9, 2, '2x sehari', 4, 4);
+INSERT INTO `resep_obat` VALUES (10, 12, '2x sehari', 5, 3);
+INSERT INTO `resep_obat` VALUES (11, 5, '3x sehari', 5, 5);
 
 SET FOREIGN_KEY_CHECKS = 1;

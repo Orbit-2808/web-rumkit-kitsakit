@@ -106,7 +106,7 @@
             <div class="content">
               <h3>Why Choose KitSakit?</h3>
               <p>
-                Pak slapur main gendang jago banget rek
+                1001 alasan untuk memilih kami
               </p>
               <div class="text-center">
                 <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
@@ -119,22 +119,22 @@
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-receipt"></i>
-                    <h4>Bagas Dribble</h4>
-                    <p>Tutor dribble king</p>
+                    <h4>Cepat</h4>
+                    <p>Tenaga medis kami sangat satset</p>
                   </div>
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-cube-alt"></i>
-                    <h4>Adrian love franklin</h4>
-                    <p>Cinta sejati tak akan pernah mati</p>
+                    <h4>Tepat</h4>
+                    <p>Tenaga medis kami tidak mungkin salah diagnosis (kayaknya)</p>
                   </div>
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-images"></i>
-                    <h4>Legi tampan</h4>
-                    <p>Ketampanan tak terbatas</p>
+                    <h4>Bersahabat</h4>
+                    <p>Tenaga medis kami sok asik</p>
                   </div>
                 </div>
               </div>
@@ -151,29 +151,29 @@
 
         <div class="row">
           <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4"></a>
+            <a href="" class="glightbox play-btn mb-4"></a>
           </div>
 
           <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-            <h3>Enim quis est voluptatibus aliquid consequatur fugiat</h3>
-            <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi. Libero laboriosam sint et id nulla tenetur. Suscipit aut voluptate.</p>
+            <h3>KitSakit, rumah sakit berpengalaman yang akan menjadi solusi segala penyakit anda :)</h3>
+            <p>Tugas KitSakit, lebih daripada itu. Kucing atas pokok, kerbau masuk parit, kuda terlepas, ular dalam rumah... Semua kami selamatkan</p>
 
             <div class="icon-box">
               <div class="icon"><i class="bx bx-fingerprint"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+              <h4 class="title"><a href="">Cepat</a></h4>
+              <p class="description">Tenaga medis kami sangat satset</p>
             </div>
 
             <div class="icon-box">
               <div class="icon"><i class="bx bx-gift"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+              <h4 class="title"><a href="">Tepat</a></h4>
+              <p class="description">Tenaga medis kami tidak mungkin salah diagnosis (kayaknya)</p>
             </div>
 
             <div class="icon-box">
               <div class="icon"><i class="bx bx-atom"></i></div>
-              <h4 class="title"><a href="">Dine Pad</a></h4>
-              <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
+              <h4 class="title"><a href="">Bersahabat</a></h4>
+              <p class="description">Tenaga medis kami sok asik</p>
             </div>
 
           </div>
@@ -188,7 +188,7 @@
 
         <div class="section-title">
           <h2>Obat</h2>
-          <p>List Obat unyuuu</p>
+          <p>Obat-obat gacor</p>
         </div>
 
         <div class="row">
@@ -206,10 +206,6 @@
                       <li class="list-group-item"><b>Harga: </b>Rp<?=number_format($obat['harga'],0,"",".")?></li>
                       <li class="list-group-item"><b>Stok: </b><?=$obat['stok']?></li>
                   </ul>
-                  <!-- <div class="card-body">
-                      <a href="#" class="card-link">Card link</a>
-                      <a href="#" class="card-link">Another link</a>
-                  </div> -->
               </div>
           </div>
           <?php
@@ -219,7 +215,7 @@
         </div>
 
       </div>
-    </section><!-- End Services Section -->
+    </section><!-- End Obat Section -->
 
     <!-- ======= Doctors Section ======= -->
     <section id="doctors" class="doctors section-bg">
@@ -235,15 +231,15 @@
           <?php
             foreach($listDokter as $dokter){
           ?>
-          <div class="col-lg-6">
-            <div class="member d-flex align-items-center">
-              <div class="pic"><img src="assets/img/doctors/<?= $dokter['foto'] ?>" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4><?= $dokter['nama_dokter'] ?></h4>
-                <p><?= $dokter['spesialisasi'] ?></p>
+            <div class="col-lg-6">
+              <div class="member d-flex align-items-center">
+                <div class="pic"><img src="assets/img/doctors/<?= $dokter['foto'] ?>" class="img-fluid" alt=""></div>
+                <div class="member-info">
+                  <h4><?= $dokter['nama_dokter'] ?></h4>
+                  <p><?= $dokter['spesialisasi'] ?></p>
+                </div>
               </div>
             </div>
-          </div>
           <?php
             }
           ?>

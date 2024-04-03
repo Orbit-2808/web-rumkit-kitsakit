@@ -193,40 +193,6 @@
       </div>
     </section><!-- Obat Section -->
 
-    <!-- ======= Services Section ======= -->
-    <!-- <section id="departments" class="services">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Departments</h2>
-          <p>List department unyuuu</p>
-        </div>
-
-        <div class="row">
-          <?php
-            foreach($listDepartmen as $departmen){
-              $listDokterDepartmen = readDokterDepartmen($departmen['id_departmen']);
-          ?>
-            <div class="col-lg-4 col-md-4 d-flex align-items-stretch mt-4 mt-mg-0">
-              <div class="icon-box">
-                <h4><a href=""><span><?= $departmen['nama_departmen'] ?></span></a></h4>
-                <?php
-                  foreach($listDokterDepartmen as $dokterDepartmen){
-                    echo "<p>".$dokterDepartmen['nama_dokter'].", </p>";
-                  }
-                ?>
-              </div>
-            </div>
-          <?php
-            }
-          ?> 
-
-        </div>
-
-      </div>
-    </section> -->
-    <!-- End Services Section -->
-
     <!-- ======= Doctors Section ======= -->
     <section id="doctors" class="doctors section-bg">
       <div class="container">

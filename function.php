@@ -1,5 +1,17 @@
 <?php
     include('config.php');
+    
+    function readDokter(){
+        global $conn;
+        
+        $query = "SELECT dokter.*, departmen.spesialisasi 
+        FROM dokter 
+        INNER JOIN departmen 
+        ON dokter.id_departmen = departmen.id_departmen";
+        $result = mysqli_query($conn, $query);
+        
+        return $result;
+    }
 
     function readDepartmen(){
         global $conn;
@@ -9,24 +21,15 @@
 
         return $result;
     }
-    
-    function readDokter(){
-        global $conn;
-    
-        $query = "SELECT dokter.*, departmen.spesialisasi FROM dokter INNER JOIN departmen ON dokter.id_departmen = departmen.id_departmen";
-        $result = mysqli_query($conn, $query);
-    
-        return $result;
-    }
 
-    function readDokterDepartmen($id_departmen){
+    function readQuery($table, $id, $find){
         global $conn;
-
-        $query = "SELECT * FROM dokter WHERE id_departmen = ".$id_departmen;
+        $query = "SELECT * FROM ".$table." WHERE ".$id."=".$find;
         $result = mysqli_query($conn, $query);
+        $result = mysqli_fetch_assoc($result);
 
         return $result;
-    }
+    };
 
     function readRekamMedis(){
         global $conn;
@@ -64,15 +67,6 @@
         return $result;
     }
 
-    function readQuery($table, $id, $find){
-        global $conn;
-        $query = "SELECT * FROM ".$table." WHERE ".$id."=".$find;
-        $result = mysqli_query($conn, $query);
-        $result = mysqli_fetch_assoc($result);
-
-        return $result;
-    };
-
     function addDokter($data, $file){
         global $conn;
 
@@ -98,7 +92,7 @@
         return $isSucceed;
     }
 
-    function editDokter($data, $file){
+    function updateDokter($data, $file){
         global $conn;
 
         $id = $data['id'];
@@ -127,7 +121,7 @@
     function deleteDokter($id){
         global $conn;
 
-        $query = "DELETE FROM dokter WHERE id_dokter=".$id;
+        $query = "DELETE FROM dokter WHERE id_dokter=$id";
         $result = mysqli_query($conn, $query);
 
         $isSucceed = mysqli_affected_rows($conn);
@@ -159,7 +153,7 @@
         return $isSucceed;
     }
 
-    function editObat($data, $file){
+    function updateObat($data, $file){
         global $conn;
 
         $id = $data['id'];
@@ -211,7 +205,7 @@
         return $isSucceed;
     }
 
-    function editRekamMedis($data){
+    function updateRekamMedis($data){
         global $conn;
 
         $id = $data['id'];
@@ -254,7 +248,7 @@
         return $isSucceed;
     }
 
-    function editResepObat($data){
+    function updateResepObat($data){
         global $conn;
 
         $idResepObat = $data['id_resep_obat'];

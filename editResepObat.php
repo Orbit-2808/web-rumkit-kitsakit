@@ -23,7 +23,7 @@
 
     if (isset($_POST['btn-edit-resep'])) {
         // jalankan query edit record baru
-        $isAddSucceed = editResepObat($_POST);
+        $isAddSucceed = updateResepObat($_POST);
         $idRekamMedis = $_POST['id_rekam_medis'];
         if ($isAddSucceed > 0) {
             // jika penambahan sukses, tampilkan alert

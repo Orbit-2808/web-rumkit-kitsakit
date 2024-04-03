@@ -121,7 +121,7 @@
                     <option value="" selected disabled hidden>Pilih</option>
                     <?php
                         foreach($listDokter as $dokter){
-                            echo '<option value="'.$dokter['id_dokter'].'">'.$dokter['nama_dokter'].'</option>';
+                            echo '<option value="'.$dokter['id_dokter'].'">'.$dokter['nama_dokter'].' | '.$dokter['spesialisasi'].'</option>';
                         }
                     ?>
                 </select>

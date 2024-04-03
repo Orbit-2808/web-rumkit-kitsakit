@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "db_rumah_sakit";
+$database = "kitsakit";
 
 // Check connection
 if ($conn->connect_error) {
@@ -23,7 +23,7 @@ if ($conn->query($createDatabaseQuery) === TRUE) {
 // Select database
 $conn->select_db($database);
 
-$sqlFile = 'db_rumah_sakit.sql';
+$sqlFile = 'kitsakit.sql';
 
 // Read SQL file content
 $sql = file_get_contents($sqlFile);

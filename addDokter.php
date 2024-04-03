@@ -140,11 +140,13 @@
                 <label for="departmen">Department</label>
                 <select class="form-select" aria-label="Category" id="departmen" name="departmen" required>
                     <option value="" selected disabled hidden>Pilih</option>
-                    <?php
-                        foreach($listDepartmen as $departmen){
-                            echo '<option value="'.$departmen['id_departmen'].'">'.$departmen['nama_departmen'].'</option>';
-                        }
-                    ?>
+                        <?php
+                            foreach($listDepartmen as $departmen){
+                                echo '<option value="'.$departmen['id_departmen'].'">'.
+                                $departmen['nama_departmen']
+                                .'</option>';
+                            }
+                        ?>
                 </select>
             </div>
 
@@ -154,7 +156,6 @@
             </div>
 
             <a href="admin.php"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button></a>
-            <!-- <button type="submit" class="btn btn-info text-white" name="btn-add" id="btn-add" form="form-add">Tambahkan Menu</button> -->
             <button type="submit" class="btn btn-primary text-white" name="btn-add" id="btn-add" form="form-add">Tambah Dokter</button>
         </form>
 

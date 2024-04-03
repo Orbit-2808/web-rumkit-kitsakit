@@ -1,7 +1,15 @@
 <?php
     include('function.php');
 
-    $idRekamMedis = $_GET['id'];
+    if(isset($_GET['id'])){
+      $idRekamMedis = $_GET['id'];
+    }else {
+      echo "
+      <script>
+        alert('Masukkan data id.');
+        window.location='admin.php';
+      </script>";
+    } 
     $listObat = readObat();
 
     if (isset($_POST['btn-add'])) {
