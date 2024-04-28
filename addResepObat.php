@@ -1,43 +1,44 @@
 <?php
     include('function.php');
 
-    if(isset($_GET['id'])){
-      $idRekamMedis = $_GET['id'];
-    }else {
-      echo "
-      <script>
-        alert('Masukkan data id.');
-        window.location='admin.php';
-      </script>";
-    } 
     $listObat = readObat();
-
+    
     if (isset($_POST['btn-add'])) {
-        // jalankan query tambah record baru
-        $isAddSucceed = addResepObat($_POST);
-        $idRekamMedis = $_POST['id_rekam_medis'];
-        if ($isAddSucceed > 0) {
-            // jika penambahan sukses, tampilkan alert
-            echo "
-            <script>
-                alert('Data Berhasil Ditambahkan');
-                document.location.href = 'resep_obat.php?id=$idRekamMedis';
-            </script>";
-        } else {
-            echo "
-            <script>
-                alert('Gagal menambahkan Data !');
-                document.location.href = 'resep_obat.php?id=$idRekamMedis';
-            </script>
-            ";
-        }
+      // jalankan query tambah record baru
+      $idRekamMedis = $_POST['id_rekam_medis'];
+      $isAddSucceed = addResepObat($_POST);
+      if ($isAddSucceed > 0) {
+        // jika penambahan sukses, tampilkan alert
+        echo "
+        <script>
+        alert('Data Berhasil Ditambahkan');
+        document.location.href = 'resep_obat.php?id=$idRekamMedis';
+        </script>";
+      } else {
+        echo "
+        <script>
+        alert('Gagal menambahkan Data !');
+        document.location.href = 'resep_obat.php?id=$idRekamMedis';
+        </script>
+        ";
     }
+  }
+
+  if(isset($_GET['id'])){
+    $idRekamMedis = $_GET['id'];
+  }else {
+    echo "
+    <script>
+      alert('Masukkan data id.');
+      window.location='admin.php';
+    </script>";
+  } 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  
+  <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
